@@ -27,7 +27,7 @@ public class Triangle {
         double area = Math.sqrt(u * (u-s1) * (u-s2) * (u-s3));
 
         //Result
-        System.out.println("The area of the triangle: " + area);
+        System.out.format("The area of the triangle: %.2f", area);
 
     }
 }
