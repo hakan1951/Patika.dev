@@ -18,7 +18,7 @@ public class VatCalculator {
         Scanner sc = new Scanner(System.in);
 
         //User input.
-        System.out.println("Enter the price(TL): ");
+        System.out.print("Enter the price(TL): ");
         double price = sc.nextDouble();
         sc.close();
 
