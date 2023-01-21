@@ -1,2 +1,3 @@
-# Patika.dev
- pd
+Patika.dev
+
+User: Hakan Taşar
