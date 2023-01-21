@@ -1,6 +1,6 @@
 ## First Repo - Kodluyoruz
 "Kodluyoruz" is the first repo for Patika.dev FrontEnd Tutorial.
-!<img width="768" alt="repo1" src="https://user-images.githubusercontent.com/99360713/213878004-0b61230d-fed3-4e89-94b6-141904602b85.png">
+!<img width="590" alt="repo" src="https://user-images.githubusercontent.com/99360713/213878195-26db4696-5ddd-4785-9487-dd21ac00c3c0.png">
 
 ### Installation
 https://github.com/hakan1951/Patika.dev.git
