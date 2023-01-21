@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+/*  Take the height and weight values from the user and assign them to a variable.
+    Calculate the user's "Body Mass Index" according to the formula below and print it on the screen. */
 public class BmiCalculator {
     public static void main(String[] args) {
 
@@ -18,7 +20,6 @@ public class BmiCalculator {
                 +"\nYour height : " + height
                 + "\nYour weight : " + weight
                 + "\nYour bmi : " + bmi);
-
 
     }
 }
