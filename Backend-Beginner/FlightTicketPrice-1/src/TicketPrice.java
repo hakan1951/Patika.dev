@@ -1,7 +1,4 @@
 import java.util.Scanner;
-
-public class TicketPrice {
-
 /*
 Make a program that calculates air ticket prices according to distance and conditions.
 Get Distance (KM), age and trip type (One Way, Round-trip) information from the user.
@@ -16,6 +13,7 @@ If the person is over 65 years old, a 30% discount is applied on the ticket pric
 If the person has chosen the journey type "round-trip", 20% discount is applied on the ticket price.
 
 */
+public class TicketPrice {
     public static void main(String[] args) {
         final double farePerDistance = 0.10; //Per km.
 
@@ -27,11 +25,12 @@ If the person has chosen the journey type "round-trip", 20% discount is applied 
         sc.nextLine(); // dummy escape.
         System.out.print("Enter your ticket type (1/2) (1-One Way, 2-Round-trip): ");
         String journeyType = sc.nextLine();
-
+        //Check.
         if ((distance <= 0) || (age <= 0) || !((journeyType.equals("1") || journeyType.equals("2")))){
             System.out.println("Wrong data.");
             return;
         }
+        //Applying discounts.
         double totalPrice = distance * farePerDistance;
         double discount = 0;
         if (age < 12){
@@ -42,12 +41,12 @@ If the person has chosen the journey type "round-trip", 20% discount is applied 
             discount = 0.30;
         }
         totalPrice -= totalPrice * discount;
+
         if (journeyType.equals("2")){
             double journeyTypeDiscount = 0.20;
             totalPrice -= totalPrice * journeyTypeDiscount;
             totalPrice *= 2; //Round-trip.
         }
         System.out.println("Total price : " + totalPrice);
-
     }
 }
