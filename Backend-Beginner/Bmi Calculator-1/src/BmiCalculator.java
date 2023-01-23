@@ -13,6 +13,7 @@ public class BmiCalculator {
         double height = scanner.nextDouble();
         System.out.print("Your weight: ");
         int weight = scanner.nextInt();
+        scanner.close();
 
         double bmi = weight / (Math.pow(height, 2));
 
