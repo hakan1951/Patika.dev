@@ -5,6 +5,7 @@ public class DigitSum {
         System.out.print("Enter number: ");
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
+        scanner.close();
         int result = 0;
         int temp = number;
 

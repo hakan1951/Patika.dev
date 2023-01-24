@@ -25,9 +25,10 @@ public class TicketPrice {
         sc.nextLine(); // dummy escape.
         System.out.print("Enter your ticket type (1/2) (1-One Way, 2-Round-trip): ");
         String journeyType = sc.nextLine();
+        sc.close();
         //Check.
         if ((distance <= 0) || (age <= 0) || !((journeyType.equals("1") || journeyType.equals("2")))){
-            System.out.println("Wrong data.");
+            System.out.println("You have entered wrong data.");
             return;
         }
         //Applying discounts.
