@@ -1,10 +1,11 @@
 import java.util.Scanner;
-//Diamond with stars.
+//Reverse triangle with n steps.
 public class ReverseTriangle {
     public static void main(String[] args) {
-        Scanner klavye = new Scanner(System.in);
-        System.out.print("Bir Sayı Giriniz :");
-        int n = klavye.nextInt();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number :");
+        int n = sc.nextInt();
+        sc.close();
 
         for(int i=n; i>=1; i--) {
             for(int j=1; j<=(n-i); j++) {
@@ -15,7 +16,5 @@ public class ReverseTriangle {
             }
             System.out.println();
         }
-
-
     }
 }
