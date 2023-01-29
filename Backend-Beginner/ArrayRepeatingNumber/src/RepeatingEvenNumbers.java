@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-//Print repeating even numbers. (In original; what about repeating 0's in this array?)
+//Print repeating even numbers.
 public class RepeatingEvenNumbers {
     public static void main(String[] args) {
         int[] list = {3, 7, 3, 3, 2, 9, 10, 21, 1, 33, 9, 1, 2, 4, 0, 0, 0, 0, 6, 4, 12, 12, -16,-16,-16};
@@ -25,6 +25,7 @@ public class RepeatingEvenNumbers {
         }
         System.out.println(resultList);
     }
+    //Without ArrayList(not true if list includes 0's).
     /*
         //The original solution without repeating 0's.
         int[] copyList = new int[list.length];
