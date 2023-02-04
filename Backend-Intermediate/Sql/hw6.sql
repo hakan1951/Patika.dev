@@ -15,4 +15,4 @@ Where film.rental_rate=0.99;
 --4--
 Select Count(Distinct replacement_cost)
 From film
-Where film.length>150
+Where film.length>150;
