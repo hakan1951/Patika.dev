@@ -1,5 +1,7 @@
 package java101.obstacle.monsters;
 
+import java101.obstacle.Obstacle;
+
 public class Zombie extends Obstacle {
 
     public Zombie() {

@@ -20,7 +20,7 @@ public class Shop extends NormalLocation {
             System.out.print("Select an operation: ");
             int selection = sc.nextInt(); //Shop extends NormalLocation -> Location(Scanner)
             while (selection < 0 || selection > 3){
-                System.out.println("Invalid selection. Try again.");
+                System.out.print("Invalid selection. Try again: ");
                 selection = sc.nextInt();
             }
             switch (selection) {
@@ -60,14 +60,18 @@ public class Shop extends NormalLocation {
             weaponSelection = sc.nextInt();
         }
         Weapon selectedWeapon = Weapon.getWeaponByID(weaponSelection);
+        sc.nextLine();
 
         if (selectedWeapon != null){
             if (selectedWeapon.getPrice() > this.getPlayer().getMoney()){
                 System.out.println("Insufficient balance.");
             }else {
                 this.getPlayer().setMoney(this.getPlayer().getMoney() - selectedWeapon.getPrice());
-                //System.out.println("New balance: " + this.getPlayer().getMoney());
                 this.getPlayer().getInventory().setWeapon(selectedWeapon);
+                System.out.println("You bought a " + selectedWeapon.getName() + ".");
+                this.getPlayer().printPlayerInfo();
+                System.out.println("--------------------");
+                //System.out.println("New balance: " + this.getPlayer().getMoney());
             }
         }
     }
