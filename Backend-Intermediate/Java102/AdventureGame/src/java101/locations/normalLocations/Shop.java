@@ -14,9 +14,10 @@ public class Shop extends NormalLocation {
         System.out.println("Welcome to the shop.");
         boolean control = true;
         while(control){
-            System.out.println("1-Show Weapons" +
-                    "\n2-Show Armors" +
-                    "\n0-Exit");
+            System.out.println("""
+                    1-Show Weapons
+                    2-Show Armors
+                    0-Exit""");
             System.out.print("Select an operation: ");
             int selection = sc.nextInt(); //Shop extends NormalLocation -> Location(Scanner)
             while (selection < 0 || selection > 3){
@@ -24,18 +25,18 @@ public class Shop extends NormalLocation {
                 selection = sc.nextInt();
             }
             switch (selection) {
-                case 1:
+                case 1 -> {
                     printWeapons();
                     buyWeapon();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     printArmors();
                     buyArmors();
-                    break;
-                case 0:
+                }
+                case 0 -> {
                     System.out.println("Thanks.");
                     control = false;
-                    break;
+                }
             }
         }
         sc.nextLine();

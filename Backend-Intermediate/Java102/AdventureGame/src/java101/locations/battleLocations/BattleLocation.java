@@ -7,9 +7,9 @@ import java101.obstacle.Obstacle;
 import java.util.Random;
 
 public abstract class BattleLocation extends Location {
-    private Obstacle obstacle;
-    private String award;
-    private int maxObstacle;
+    private final Obstacle obstacle;
+    private final String award;
+    private final int maxObstacle;
     public BattleLocation(Player player, String name, Obstacle obstacle, String award, int maxObstacle) {
         super(player, name);
         this.obstacle = obstacle;
@@ -27,6 +27,7 @@ public abstract class BattleLocation extends Location {
         String selection = (sc.nextLine()).toUpperCase();
         if (selection.equals("F") && fight(obstacleNumber)){
                 System.out.println(this.getName() + " is completed.");
+                System.out.format("You got %s.\n", this.getAward());
                 return true;
         }
         if (this.getPlayer().getHp() <= 0){
@@ -47,7 +48,7 @@ public abstract class BattleLocation extends Location {
             playerStatus();
             obstacleStatus(i);
             while (this.getPlayer().getHp() > 0 && this.getObstacle().getHp() > 0){
-                System.out.println("Run or Fight. (R/F): ");
+                System.out.print("Run or Fight. (R/F): ");
                 String selection = sc.nextLine().toUpperCase();
                 if (selection.equals("F")){
                     System.out.println("--Hit!");
@@ -93,35 +94,20 @@ public abstract class BattleLocation extends Location {
                 "\nDefence: " + this.getPlayer().getArmor().getDefence() +
                 "\nMoney: " + this.getPlayer().getMoney());
     }
-
     public void obstacleStatus(int i){
         System.out.println("-----" + i + ". " + this.getObstacle().getName() + "-----" +
                 "\nHp: " + this.getObstacle().getHp() +
                 "\nDamage: " + this.getObstacle().getDamage() +
                 "\nAward: " + this.getObstacle().getAward());
     }
-
     public Obstacle getObstacle() {
         return obstacle;
     }
-
-    public void setObstacle(Obstacle obstacle) {
-        this.obstacle = obstacle;
+    public int getMaxObstacle() {
+        return maxObstacle;
     }
-
     public String getAward() {
         return award;
     }
 
-    public void setAward(String award) {
-        this.award = award;
-    }
-
-    public int getMaxObstacle() {
-        return maxObstacle;
-    }
-
-    public void setMaxObstacle(int maxObstacle) {
-        this.maxObstacle = maxObstacle;
-    }
 }

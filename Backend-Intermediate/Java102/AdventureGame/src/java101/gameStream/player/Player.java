@@ -19,7 +19,7 @@ public class Player {
     private String characterName;
     private String playerName;
     private Inventory inventory;
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     public Player(String playerName) {
         this.playerName = playerName;
