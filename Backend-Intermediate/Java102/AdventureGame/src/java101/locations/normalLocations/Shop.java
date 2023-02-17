@@ -38,6 +38,7 @@ public class Shop extends NormalLocation {
                     break;
             }
         }
+        sc.nextLine();
         return true;
     }
 

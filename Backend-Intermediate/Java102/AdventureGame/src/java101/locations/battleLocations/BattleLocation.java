@@ -19,6 +19,7 @@ public abstract class BattleLocation extends Location {
 
     @Override
     public boolean onLocation() {
+        //sc.nextLine(); //dummy escape from Shop(nextInt).
         int obstacleNumber = this.randomObstacleNumber();
         System.out.format("You are at the %s.", this.getName());
         System.out.format("\nThere are %d %ss.\n", obstacleNumber, this.getObstacle().getName());
@@ -74,7 +75,7 @@ public abstract class BattleLocation extends Location {
                 System.out.println("You got: " + this.getObstacle().getAward() + "\nYour money: " + this.getPlayer().getMoney());
             }
         }
-        return false;
+        return true;
     }
 
     public void afterHit(){
