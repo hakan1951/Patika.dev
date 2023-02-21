@@ -15,6 +15,16 @@ public abstract class Location {
     }
 
     public abstract boolean onLocation();
+    public void playerStatus(){
+        System.out.println("-----" + this.getPlayer().getPlayerName() + "-----" +
+                "\nHp: " + this.getPlayer().getHp() +
+                "\nWeapon: " + this.getPlayer().getWeapon().getName() +
+                "\nDamage: " + this.getPlayer().getTotalDamage() +
+                "\nArmor: " + this.getPlayer().getArmor().getName() +
+                "\nDefence: " + this.getPlayer().getDefence() +
+                "\nMoney: " + this.getPlayer().getMoney() +
+                "\nAwards: " + this.getPlayer().getInventory().getAwards());
+    }
     public Player getPlayer() {
         return player;
     }

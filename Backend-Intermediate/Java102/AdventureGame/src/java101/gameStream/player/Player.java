@@ -10,7 +10,6 @@ import java101.items.weapons.Weapon;
 import java.util.Scanner;
 
 public class Player {
-    /** damage, hp, money -> Character **/
     private int damage;
     private int defence;
     private int hp;
@@ -64,7 +63,8 @@ public class Player {
                 ",\tDamage: " + this.getTotalDamage() +
                 ",\tDefence: " + this.getDefence() +
                 ",\tHp: " + this.getHp() +
-                ",\tMoney: " + this.getMoney());
+                ",\tMoney: " + this.getMoney() +
+                "\tAwards: " + this.getInventory().getAwards());
     }
     public Weapon getWeapon(){
         return this.getInventory().getWeapon();
@@ -72,76 +72,63 @@ public class Player {
     public Armor getArmor(){
         return this.getInventory().getArmor();
     }
-
     public int getDamage() {
         return damage;
     }
-
     public void setDamage(int damage) {
         this.damage = damage;
     }
-
     public int getTotalDamage() {
         return damage + this.getInventory().getWeapon().getDamage();
     }
-
     public int getTotalDefence() {
         return damage + this.getInventory().getArmor().getDefence();
     }
     public int getDefence() {
         return defence + this.getInventory().getArmor().getDefence();
     }
-
     public void setDefence(int defence) {
         this.defence = defence;
     }
-
     public int getHp() {
         return hp;
     }
-
     public void setHp(int hp) {
         if (hp < 0){
             hp = 0;
         }
         this.hp = hp;
     }
-
     public int getMoney() {
         return money;
     }
-
     public void setMoney(int money) {
         this.money = money;
     }
-
+    public void addMoney(int money){
+        this.money += money;
+    }
     public Inventory getInventory() {
         return inventory;
     }
-
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
     public String getPlayerName() {
         return playerName;
     }
-
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-
     public String getCharacterName() {
         return characterName;
     }
-
     public void setCharacterName(String characterName) {
         this.characterName = characterName;
     }
-
     public int getDefaultHp() {
         return defaultHp;
     }
-
     public void setDefaultHp(int defaultHp) {
         this.defaultHp = defaultHp;
     }

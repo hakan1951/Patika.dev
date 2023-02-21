@@ -73,7 +73,6 @@ public class Shop extends NormalLocation {
                 System.out.println("You bought a " + selectedWeapon.getName() + ".");
                 this.getPlayer().printPlayerInfo();
                 System.out.println("--------------------");
-                //System.out.println("New balance: " + this.getPlayer().getMoney());
             }
         }
     }
@@ -101,8 +100,10 @@ public class Shop extends NormalLocation {
                 System.out.println("Insufficient balance.");
             }else {
                 this.getPlayer().setMoney(this.getPlayer().getMoney() - selectedArmor.getPrice());
-                //System.out.println("New balance: " + this.getPlayer().getMoney());
                 this.getPlayer().getInventory().setArmor(selectedArmor);
+                System.out.println("You bought a " + selectedArmor.getName() + ".");
+                this.getPlayer().printPlayerInfo();
+                System.out.println("--------------------");
             }
         }
     }

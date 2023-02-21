@@ -10,6 +10,7 @@ public abstract class NormalLocation extends Location {
 
     @Override
     public boolean onLocation() {
-        return true; //true --> Not possible to die.
+        return true; /**It is not possible to die in Normal Locations.*/
     }
+
 }
