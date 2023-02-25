@@ -1,23 +1,14 @@
 import java.util.*;
-//TODO: Home/Away games should be equally distributed in both stages.
-/** hakantasariztech@gmail.com */
+/** Contact: hakantasariztech@gmail.com */
 public class FixtureGenerator {
     public static ArrayList<String> teams = new ArrayList<>();
+    public static Map<String, Integer> homeAwayBalance = new HashMap<>();
 
     public static void main(String[] args) {
-        teams.add("Dortmund");
-        teams.add("Bayern");
-        teams.add("RealMadrid");
-        teams.add("Barcelona");
-        teams.add("Milan");
-        teams.add("Arsenal");
-        teams.add("Inter");
-        teams.add("Liverpool");
-        if (teams.size() % 2 == 1){
-            teams.add("Bay");
-        }
+        addDefaultTeams();
         generateFixtureGames(teams);
     }
+
     public static void generateFixtureGames(ArrayList<String> teams){
         ArrayList<String> allPossibleMatches = new ArrayList<>();
         Collections.shuffle(teams);
@@ -32,34 +23,50 @@ public class FixtureGenerator {
                 }
             }
         }
-        //Shuffle the possible matches.
-        for (int s = 0; s < 3; s++){
-            Collections.shuffle(allPossibleMatches);
-        }
 
         ArrayList<String> firstHalfMatches = new ArrayList<>();
         ArrayList<String> secondHalfMatches = new ArrayList<>();
-        while(allPossibleMatches.size() > 0){
-            int maxIteration = allPossibleMatches.size() + 1;
-            int iterationsDone = 0;
-            while (allPossibleMatches.size() > 0 && iterationsDone < maxIteration ){
-                maxIteration--;
-                String firstMatch = allPossibleMatches.get(0);
-                String[] strList = firstMatch.split("-");
-                String secondMatch = strList[1] + "-" + strList[0];
-                firstHalfMatches.add(firstMatch);
-                secondHalfMatches.add(secondMatch);
-                allPossibleMatches.remove(firstMatch);
-                allPossibleMatches.remove(secondMatch);
+        ArrayList<String> temporaryMatches = new ArrayList<>();
+        while (true){
+            Collections.shuffle(temporaryMatches);
+            temporaryMatches.clear();
+            temporaryMatches.addAll(allPossibleMatches);
+            firstHalfMatches.clear();
+            secondHalfMatches.clear();
+            while(temporaryMatches.size() > 0){
+                Collections.shuffle(temporaryMatches);
+                int maxIteration = temporaryMatches.size(); //Continuously changing.
+                int iterationsDone = 0;
+                while (temporaryMatches.size() > 0 && iterationsDone <= maxIteration){
+                    maxIteration--;
+                    String firstMatch = temporaryMatches.get(0);
+                    String[] strList = firstMatch.split("-");
+                    String secondMatch = strList[1] + "-" + strList[0];
+                    if (homeAwayBalance.get(strList[0]) <=3){
+                        homeAwayBalance.put(strList[0], homeAwayBalance.get(strList[0])+1);
+                        firstHalfMatches.add(firstMatch);
+                        secondHalfMatches.add(secondMatch);
+                    }else {
+                        firstHalfMatches.add(secondMatch);
+                        secondHalfMatches.add(firstMatch);
+                    }
+                    temporaryMatches.remove(firstMatch);
+                    temporaryMatches.remove(secondMatch);
+                }
             }
+            if (isHomeAwayGamesBalanced(homeAwayBalance)){
+                break;
+            }
+            clearHomeAwayGamesBalanced(homeAwayBalance);
         }
+
         Collections.shuffle(firstHalfMatches);
         Collections.shuffle(secondHalfMatches);
 
-        generateFixture(firstHalfMatches, 1);
-        generateFixture(secondHalfMatches, 2);
+        generateFixtureStages(firstHalfMatches, 1);
+        generateFixtureStages(secondHalfMatches, 2);
     }
-    public static void generateFixture(ArrayList<String> matchesForStage, int half) {
+    public static void generateFixtureStages(ArrayList<String> matchesForStage, int half) {
         if (half == 1){
             System.out.println("-----Fall Stage-----\n");
         }else {
@@ -87,8 +94,24 @@ public class FixtureGenerator {
             }
         } while (roundList.size() != matchesForStage.size());
 
-        printFixture(roundList,half);
-        printFixture(roundList,half);
+        printFinalFixture(roundList,half);
+    }
+    public static void printFinalFixture(ArrayList<String> listToPrint, int half){
+        int weekNumber = 1;
+        int matchesPerWeek = teams.size()/2; //E.g. 6 teams --> 3 matches per week.
+        int weeks = listToPrint.size()/((teams.size())/2); // E.g. 6 teams --> 5 matches per stage; 5x3 = 15 games per stage; 15/3 = 5 weeks per stage.
+        if (half != 1){
+            weekNumber += weeks;
+        }
+        for (int t = 0; t < weeks; t++){
+            System.out.format("\t\033[4mWeek %d\033[0m\n", (weekNumber));
+            weekNumber++;
+            for (int i = 0; i < matchesPerWeek; i++){
+                System.out.println(listToPrint.get(0));
+                listToPrint.remove(0);
+            }
+            System.out.println();
+        }
     }
     public static ArrayList<String> getWeeklyMatches(ArrayList<String> matchList){
         ArrayList<String> returnList = new ArrayList<>();
@@ -122,21 +145,34 @@ public class FixtureGenerator {
         }
         return returnList;
     }
-    public static void printFixture(ArrayList<String> listToPrint, int half){
-        int weekNumber = 1;
-        int matchesPerWeek = teams.size()/2;
-        int weeks = listToPrint.size()/((teams.size())/2);
-        if (half == 2){
-            weekNumber += weeks;
+    public static void clearHomeAwayGamesBalanced(Map<String, Integer> homeAwayBalance){
+        for (String team : teams) {
+            homeAwayBalance.put(team, 0);
         }
-        for (int t = 0; t < weeks; t++){
-            System.out.format("Week %d\n", (weekNumber));
-            weekNumber++;
-            for (int i = 0; i < matchesPerWeek; i++){
-                System.out.println(listToPrint.get(0));
-                listToPrint.remove(0);
+    }
+    public static boolean isHomeAwayGamesBalanced(Map<String, Integer> homeAwayBalance){
+        for (String team : teams) {
+            int homeGames = homeAwayBalance.get(team);
+            if (2 >= homeGames || homeGames > 4) {
+                return false;
             }
-            System.out.println();
+        }
+        return true;
+    }
+    public static void addDefaultTeams(){
+        teams.add("Arsenal");
+        teams.add("Barcelona");
+        teams.add("Bayern");
+        teams.add("Dortmund");
+        teams.add("Inter");
+        teams.add("Liverpool");
+        teams.add("Milan");
+        teams.add("RealMadrid");
+        if (teams.size() % 2 == 1){
+            teams.add("Bay");
+        }
+        for (String team : teams) {
+            homeAwayBalance.put(team, 0);
         }
     }
 }
