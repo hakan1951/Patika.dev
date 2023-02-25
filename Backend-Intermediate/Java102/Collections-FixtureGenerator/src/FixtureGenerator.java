@@ -3,7 +3,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Contact: hakantasariztech@gmail.com */
+/**
+ * There may be consecutive home/away games. Find an optimal for the league.
+ * Contact: hakantasariztech@gmail.com
+ */
 public class FixtureGenerator {
     public static ArrayList<String> teams = new ArrayList<>();
     public static Map<String, Integer> homeAwayBalance = new HashMap<>();
@@ -66,16 +69,10 @@ public class FixtureGenerator {
 
         Collections.shuffle(firstHalfMatches);
         Collections.shuffle(secondHalfMatches);
-
         generateFixtureStages(firstHalfMatches, 1);
         generateFixtureStages(secondHalfMatches, 2);
     }
     public static void generateFixtureStages(ArrayList<String> matchesForStage, int half) {
-        if (half == 1){
-            System.out.println("-----Fall Stage-----\n");
-        }else {
-            System.out.println("-----Spring Stage-----\n");
-        }
         ArrayList<String> roundList = new ArrayList<>();
         ArrayList<String> temporaryMatchList = new ArrayList<>();
 
@@ -101,17 +98,22 @@ public class FixtureGenerator {
         printFinalFixture(roundList,half);
     }
     public static void printFinalFixture(ArrayList<String> listToPrint, int half){
+        if (half == 1){
+            System.out.println("\n-----Fall(1st) Stage-----\n");
+        }else {
+            System.out.println("-----Spring(2nd) Stage-----\n");
+        }
         int weekNumber = 1;
-        int matchesPerWeek = teams.size()/2; //E.g. 6 teams --> 3 matches per week.
-        int weeks = listToPrint.size()/((teams.size())/2); // E.g. 6 teams --> 5 matches per stage; 5x3 = 15 games per stage; 15/3 = 5 weeks per stage.
+        int matchesPerWeek = teams.size()/2; //E.g. Total of 6 teams --> 3 matches per week.
+        int weeks = listToPrint.size()/((teams.size())/2); // E.g. 6 teams --> Each 5 matches(weeks) per stage
         if (half != 1){
             weekNumber += weeks;
         }
         for (int t = 0; t < weeks; t++){
-            System.out.format("\t\033[4mWeek %d\033[0m\n", (weekNumber));
+            System.out.format("\t\t\033[4mWeek %d\033[0m\n", (weekNumber));
             weekNumber++;
             for (int i = 0; i < matchesPerWeek; i++){
-                System.out.println(listToPrint.get(0));
+                System.out.println("\t" + listToPrint.get(0));
                 listToPrint.remove(0);
             }
             System.out.println();
@@ -119,11 +121,10 @@ public class FixtureGenerator {
     }
     public static ArrayList<String> getWeeklyMatches(ArrayList<String> matchList){
         ArrayList<String> returnList = new ArrayList<>();
-        ArrayList<String> emptyList = new ArrayList<>();
         ArrayList<String> allTeams = new ArrayList<>(teams);
         ArrayList<String> temporaryMatchList = new ArrayList<>(matchList);
         int x = matchList.size();
-        int counter = 0; //Used for the continuity of while(true) loop.
+        int counter = 0; //Used for the continuity of the while(true) loop.
         boolean exit = false;
         while (!exit) {
             int matchesPerWeek = teams.size()/2;
@@ -143,7 +144,7 @@ public class FixtureGenerator {
                 }
             }
             if (counter == matchList.size()){
-                return emptyList;
+                return new ArrayList<>();
             }
             counter++;
         }
