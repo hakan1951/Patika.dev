@@ -1,4 +1,8 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /** Contact: hakantasariztech@gmail.com */
 public class FixtureGenerator {
     public static ArrayList<String> teams = new ArrayList<>();
